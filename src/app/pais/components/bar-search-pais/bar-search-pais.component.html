@@ -1,0 +1,12 @@
+<!-- Buscar cuando se presione Start/Enter -->
+<form (ngSubmit)="buscar()" autocomplete="off">
+  <input
+    class="form-control"
+    type="text"
+    [(ngModel)]="termino"
+    (input)="teclaPresionada()"
+    name="termino"
+    [placeholder]="placeholder"
+  />
+  <!-- [(ngModel)] envia el value a la variable termino -->
+</form>

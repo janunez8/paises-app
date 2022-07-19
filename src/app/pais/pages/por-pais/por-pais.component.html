@@ -1,0 +1,42 @@
+<div class="animate__animated animate__fadeIn animate__faster">
+  <h2>Por País</h2>
+  <hr />
+
+  <div class="row">
+    <div class="col">
+      <app-bar-search-pais
+        (onEnter)="buscar($event)"
+        (onDebounce)="sugerencias($event)"
+        placeholder="Buscar por país"
+      ></app-bar-search-pais>
+    </div>
+  </div>
+
+  <ul class="list-group" *ngIf="mostrarSugerencias">
+    <li
+      class="list-group-item list-group-item-action"
+      *ngFor="let paisSugerido of paisesSugeridos"
+    >
+      <a class="nav-link" [routerLink]="['/pais/', paisSugerido.cca2]">{{
+        paisSugerido.name.common
+      }}</a>
+    </li>
+    <li
+      class="list-group-item list-group-item-action"
+      (click)="buscar(termino)"
+    >
+      <a class="nav-link"> Buscar: "{{ termino }}" </a>
+    </li>
+  </ul>
+  <!-- "{{}}" obtiene el value de las comillas y el Buscar: no lo toma en cuenta -->
+  <hr />
+</div>
+<div class="alert alert-danger" *ngIf="hayError">
+  No se encontró ningun resultado con el termino: {{ termino }}
+</div>
+
+<div class="row" *ngIf="!hayError && paises.length > 0">
+  <div class="col">
+    <app-pais-tabla [paises]="paises"></app-pais-tabla>
+  </div>
+</div>
